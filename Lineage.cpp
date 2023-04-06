@@ -164,7 +164,7 @@ int index_of(Gene *dna, string seq, int num_nodes)
 // Output: Source can or cannot evolve into target.
 bool evolution(Gene *genes, string src, string tgt, int num_genes)
 {
-    int 1 = 0;
+    int i = 0;
     Gene *new_source = check_existence(genes, num_genes, src, i);
     string new_src;
 
@@ -190,4 +190,39 @@ bool evolution(Gene *genes, string src, string tgt, int num_genes)
         new_src = new_source->mut.target->sq;
     }
     return evolution(genes, num_genes, new_src, tgt);
+}
+
+// evolution steps
+// Input: Pointer to array of genes, number of genes, source gene, and target gene.
+// Description: Checking how many evolutionary steps.
+// Output: How many evolution steps it takes to get from source to target.
+void evolution_steps_help(Gene *all_genes, int num_nodes)
+{
+    string src, tgt, new_src;
+    cin >> src >> tgt;
+    Gene *tgt_g = &all_gene[index_of(all_genes, tgt, num_nodes)];
+    Gene *src_g = &all_gene[indez_of(all_genes, src, num_nodes)];
+
+    if (index_of(all_genes, src, num_nodes) == -1)
+    {
+        cout << "It will take " << -1 << " evolutionary steps to get from " << src << " to " << tgt << endl;
+        cout << endl;
+        return;
+    }
+    reset_loop(all_genes, num_nodes);
+
+    int n = 0;
+
+    n = evolution_steps(src_g, tgt_g, n);
+
+    if (n == -1)
+    {
+        cout << "It will take " << -1 << " evolutionary steps to get from " << src << " to " << tgt << endl;
+        cout << endl;
+    }
+    else
+    {
+       cout << "It will take " << n << " evolutionary steps to get from " << src << " to " << tgt << endl;
+        cout << endl; 
+    }
 }

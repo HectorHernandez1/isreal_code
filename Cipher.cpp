@@ -63,21 +63,27 @@ int FrequnctIDX(int ourString[], int len)
       
     // Initialize maximum element
     int max = ourString[0];
-  
-    for (i = 1; i < len; i++)
-        if (ourString[i] > max)
+    int idxLatter1 = 0;
+    for (i = 1; i < len; i++){        
+        if (ourString[i] > max){
             max = ourString[i];
+            idxLatter1 = i;
+        }
+    }
 
-
-    int idxLatter = 0;
+//cout<<"the biggest number is "<<max<<endl;
+    /*int idxLatter = 0;
     for(int i = 0; i < 26; i++){
         if(ourString[i] == max){
             idxLatter = i;
             break;
         }
     }
-
-    return idxLatter;
+    */
+//cout<<" idxLatter1 - "<<idxLatter1<<endl;
+//cout<<" idxLatter - "<<idxLatter<<endl;
+// add 1 b/c the list is 0 based
+    return idxLatter1+1;
 }
     /*returnshift 
    * Input: the list of integers from the index 
@@ -89,10 +95,10 @@ int returnShift(int AlphaListTemp[])
     //if letter is less E (5)
     int idx = FrequnctIDX(AlphaListTemp,26); 
     int finalShift = 0;
-    if( idx > 4){
-        finalShift = idx-4;
+    if( idx > 5){
+        finalShift = 5+idx;
     }else{
-        finalShift = 4-idx;
+        finalShift = 26-(5-idx);
     }
     //add 1 since the list is 0 based
     return finalShift;
@@ -110,16 +116,24 @@ int returnFreq(char ciperText[], int ciperTextLength)
 
     for(int i = 0; i < ciperTextLength; i++ )
     {
+        //cout<<" latter  - "<<ciperText[i]<<endl;
         for(int j = 0; j < 26; j++){
             if(alphabet[j] == ciperText[i]){
                 Alphalist[j] =  Alphalist[j] + 1;
+                break;
             }
         }
     }
 
-    //char mostFreqLetter = alphabet[FrequnctIDX(Alphalist,26)];
-    //cout<<mostFreqLetter;
-
+    /*
+    for(int j = 0; j < 26; j++){
+    cout<<"the current list "<<j<<" : "<<Alphalist[j]<<endl;
+    }
+    
+    char mostFreqLetter = alphabet[FrequnctIDX(Alphalist,26)];
+    cout << " most found later ";
+    cout<<mostFreqLetter<<endl;
+    */
 
     return returnShift(Alphalist);
     
